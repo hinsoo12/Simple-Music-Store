@@ -7,19 +7,25 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-
+//
 type CreateMusicFields struct {
 	Title    string `json:"title" binding:"required"`
 	Singer   string `json:"singer" binding:"required"`
 	Writer   string `json:"writer" binding:"required"`
 	Director string `json:"director" binding:"required"`
 }
-
+//
 type UpdateMusicField struct {
 	Title    string `json:"title"`
 	Singer   string `json:"singer" `
 	Writer   string `json:"writer" `
 	Director string `json:"director"`
+}
+//
+var songs = []models.Song{
+	{ID: 1, Title: "Hager Ethiopia", Singer: "Jano Band", Writer: "Jano Band", Director: "Jano Band"},
+	{ID: 1, Title: "Hager Ethiopia", Singer: "Jano Band", Writer: "Jano Band", Director: "Jano Band"},
+	{ID: 3, Title: "Hager Ethiopia", Singer: "Jano Band", Writer: "Jano Band", Director: "Jano Band"},
 }
 
 // GET /songs
@@ -27,7 +33,7 @@ func FindSongs(ctx *gin.Context) {
 	var songs []models.Song
 	models.DB.Find(&songs)
 
-	ctx.JSON(http.StatusOK, gin.H{"result", songs})
+	ctx.JSON(http.StatusOK, gin.H{"result": songs})
 }
 
 // GET /songs/:id
